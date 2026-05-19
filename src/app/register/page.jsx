@@ -124,10 +124,10 @@ const Register = () => {
                     <FieldError />
                 </TextField>
                 <div className="flex gap-2">
-                    <Button type="submit">
+                    <button className="btn btn-primary rounded-full" type="submit">
                         <Check />
                         Register
-                    </Button>
+                    </button>
                     <Button type="reset" variant="secondary">
                         Reset
                     </Button>
