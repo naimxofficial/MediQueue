@@ -4,6 +4,7 @@ import "./globals.css";
 import NextThemeProvider from "@/providers/NextThemeProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -24,7 +25,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <NextThemeProvider>
           <Navbar></Navbar>
-        <main>{children}</main>
+        <main>{children}<ToastContainer /> </main>
         <Footer></Footer>
         </NextThemeProvider>
         </body>
