@@ -20,7 +20,7 @@ export function ThemeSwitch() {
     return (
         <div className="">
             {Object.entries(icons).map(([key, value]) => (
-                <Switch onChange={() => setTheme(theme === "dark" ? "light" : "dark")}  key={key} defaultSelected size="lg">
+                <Switch onChange={() => setTheme(theme === "dark" ? "light" : "dark")} key={key} defaultSelected size="lg">
                     {({ isSelected }) => (
                         <>
                             <Switch.Control className={isSelected ? value.selectedControlClass : ""}>

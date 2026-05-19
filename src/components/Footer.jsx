@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <footer>
 
-            <div className="footer sm:footer-horizontal p-10 flex flex-col lg:flex-row justify-between">
+            <div className="footer sm:footer-horizontal not-md:p-5 p-8 flex flex-col lg:flex-row justify-between">
                 <aside className="">
                     <div className=''>
                         <div className="flex items-center gap-2">
