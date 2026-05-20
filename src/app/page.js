@@ -1,6 +1,7 @@
 import { FeaturedTutors } from "@/components/FeaturedTutors";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { StatsSection } from "@/components/StatsSection";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
 
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
       <HeroCarousel></HeroCarousel>
       <FeaturedTutors></FeaturedTutors>
       <StatsSection></StatsSection>
+      <TestimonialsSection></TestimonialsSection>
     </div>
   );
 }

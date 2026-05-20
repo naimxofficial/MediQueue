@@ -7,11 +7,11 @@ import { Star, CheckCircle, Clock } from "lucide-react"
 // import { Card, CardContent, CardFooter } from "@/components/ui/card"
 // import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter } from "./Card"
-import { Badge, Button } from "@heroui/react"
+// import { Badge, Button } from "@heroui/react"
 
 export function TutorCard({ tutor }) {
   return (
-    <Card className="group flex h-full flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+    <Card className="group flex h-full flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary-foreground/30 hover:bg-primary-foreground/[0.12]">
       <CardContent className="flex flex-1 flex-col p-5">
         <div className="flex items-start gap-4">
           <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl">
@@ -28,7 +28,7 @@ export function TutorCard({ tutor }) {
                 {tutor.name}
               </h3>
               {tutor.verified && (
-                <CheckCircle className="h-4 w-4 shrink-0 text-accent" />
+                <CheckCircle className="h-4 w-4 shrink-0 text-primary" />
               )}
             </div>
             <p className="text-sm text-muted-foreground">{tutor.subject}</p>
@@ -47,13 +47,13 @@ export function TutorCard({ tutor }) {
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          <Badge variant="secondary" className="text-xs">
+          <span variant="secondary" className="text-xs badge">
             {tutor.specialty}
-          </Badge>
-          <Badge variant="outline" className="text-xs">
+          </span>
+          <span className="text-xs badge">
             <Clock className="mr-1 h-3 w-3" />
             {tutor.experience} years
-          </Badge>
+          </span>
         </div>
 
         <p className="mt-4 line-clamp-2 flex-1 text-sm text-muted-foreground">

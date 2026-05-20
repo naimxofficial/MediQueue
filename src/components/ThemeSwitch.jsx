@@ -1,14 +1,19 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
-import {
-    Moon,
-    Sun
-} from "@gravity-ui/icons";
+import { Moon, Sun } from "@gravity-ui/icons";
 import { Switch } from "@heroui/react";
+
+const emptySubscribe = () => () => {};
+const getClientSnapshot = () => window.localStorage.getItem("theme");
+const getServerSnapshot = () => "dark";
 
 export function ThemeSwitch() {
     const { theme, setTheme } = useTheme();
+    const activeTheme = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
+    const isDark = activeTheme !== "dark";
+
     const icons = {
         darkMode: {
             off: Moon,
@@ -20,7 +25,12 @@ export function ThemeSwitch() {
     return (
         <div className="">
             {Object.entries(icons).map(([key, value]) => (
-                <Switch onChange={() => setTheme(theme === "dark" ? "light" : "dark")} key={key} defaultSelected size="lg">
+                <Switch 
+                    key={key} 
+                    isSelected={isDark} 
+                    onChange={() => setTheme(theme === "dark" ? "light" : "dark")} 
+                    size="lg"
+                >
                     {({ isSelected }) => (
                         <>
                             <Switch.Control className={isSelected ? value.selectedControlClass : ""}>
