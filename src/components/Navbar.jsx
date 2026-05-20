@@ -1,12 +1,14 @@
 'use client'
 import Link from "next/link";
 import { ThemeSwitch } from "./ThemeSwitch";
-import { Avatar, Button } from "@heroui/react";
+import { Avatar } from "@heroui/react";
 import { authClient, useSession } from "@/lib/auth-client";
-import { ArrowRightFromSquare, Gear, Persons } from "@gravity-ui/icons";
-import { Dropdown, Label } from "@heroui/react";
+import { ArrowRightFromSquare } from "@gravity-ui/icons";
+import { Dropdown } from "@heroui/react";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+    const pathname = usePathname();
     const { data, isPending } = useSession();
     if (isPending) {
         return <span className="loading loading-bars loading-xl mx-auto"></span>
@@ -22,8 +24,9 @@ const Navbar = () => {
             },
         });
     }
+    
     return (
-        <nav className=" flex h-16  items-center justify-between px-2 sm:px-6 lg:px-8">
+        <nav className="sticky top-0 z-50 flex h-16 items-center justify-between px-2 sm:px-6 lg:px-8 bg-background/70 backdrop-blur-md ">
 
             {/* Left side - MediQueue*/}
             <Link className="flex items-center gap-2" href="/">
@@ -36,13 +39,13 @@ const Navbar = () => {
 
             {/* Mid part - Navlinks */}
             <div className="hidden items-center gap-3 lg:flex">
-                <Link className="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary bg-secondary text-foreground" href="/">Home</Link>
-                <Link className="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary text-muted-foreground" href="/tutors">Tutors</Link>
+                <Link className={pathname === '/' ? 'bg-primary px-5 py-2 rounded-full text-primary-foreground font-medium' : 'px-5 py-2 rounded-full text-popover-foreground/80 hover:bg-muted'} href="/">Home</Link>
+                <Link className={pathname === '/tutors' ? 'bg-primary px-5 py-2 rounded-full text-primary-foreground font-medium' : 'text-popover-foreground/80 hover:bg-muted px-5 py-2 rounded-full'} href="/tutors">Tutors</Link>
 
                 {
-                    user && <div> <Link className="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary text-muted-foreground" href="/add-tutors">Add Tutors</Link>
-                        <Link className="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary text-muted-foreground" href="/my-tutors">My Tutors</Link>
-                        <Link className="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary text-muted-foreground" href="/dashboard/my-booked-sessions">My Booked Sessions</Link></div>
+                    user && <div> <Link className={pathname === '/add-tutors' ? 'bg-primary text-primary-foreground font-medium px-5 py-2 rounded-full' : 'text-popover-foreground/80 hover:bg-muted px-5 py-2 rounded-full'} href="/add-tutors">Add Tutors</Link>
+                        <Link className={pathname === '/my-tutors' ? 'bg-primary text-primary-foreground font-medium px-5 py-2 rounded-full' : 'text-popover-foreground/80 hover:bg-muted px-5 py-2 rounded-full'} href="/my-tutors">My Tutors</Link>
+                        <Link className={pathname === '/my-booked-sessions' ? 'bg-primary text-primary-foreground font-medium px-5 py-2 rounded-full' : 'px-5 py-2 rounded-full text-popover-foreground/80 hover:bg-muted'} href="/dashboard/my-booked-sessions">My Booked Sessions</Link></div>
                 }
 
 
@@ -67,14 +70,6 @@ const Navbar = () => {
 
                 {
                     user && <div className="navbar-end gap-3">
-                        {/* <Link href={'/profile'}>
-                            <Avatar>
-                                <Avatar.Image alt={user?.name} src={user?.image}
-                                    referrerPolicy='no-referrer' />
-                                <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
-
-                            </Avatar>
-                        </Link> */}
                         <Dropdown>
                             <Dropdown.Trigger className="rounded-full">
                                 <Avatar>
@@ -110,7 +105,6 @@ const Navbar = () => {
                                 </Dropdown.Menu>
                             </Dropdown.Popover>
                         </Dropdown>
-                        {/* <Button onClick={handleLogout} variant='danger' size="sm">Logout</Button> */}
                     </div>
                 }
 
@@ -122,17 +116,16 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 text-white rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><Link href={'/'}>Home</Link></li>
-                        <li><Link href={'/tutors'}>Tutors</Link></li>
+                        className="menu menu-sm dropdown-content bg-base-100/95 dark:bg-neutral-900/95  text-white backdrop-blur-xl rounded-xl z-50 mt-3 w-52 p-2 shadow-xl border border-border/60">
+                        <li><Link className={pathname === '/' ? 'bg-primary text-primary-foreground font-medium' : 'text-popover-foreground/80 hover:bg-muted'} href={'/'}>Home</Link></li>
+                        <li><Link className={pathname === '/tutors' ? 'bg-primary text-primary-foreground font-medium' : 'text-popover-foreground/80'} href={'/tutors'}>Tutors</Link></li>
                         {
                             user && <div>
-                                <li><Link href={'/add-tutors'}>Add Tutors</Link></li>
-                                <li><Link href={'/my-tutors'}>My Tutors</Link></li>
-                                <li><Link href={'/my-booked-sessions'}>My Booked Sessions</Link></li>
+                                <li><Link className={pathname === '/add-tutors' ? 'bg-primary text-primary-foreground font-medium' : 'text-popover-foreground/80 '} href={'/add-tutors'}>Add Tutors</Link></li>
+                                <li><Link className={pathname === '/my-tutors' ? 'bg-primary text-primary-foreground font-medium' : 'text-popover-foreground/80 '} href={'/my-tutors'}>My Tutors</Link></li>
+                                <li><Link className={pathname === '/my-booked-sessions' ? 'bg-primary text-primary-foreground font-medium' : 'text-popover-foreground/80 '} href={'/my-booked-sessions'}>My Booked Sessions</Link></li>
                             </div>
                         }
-
                     </ul>
                 </div>
             </div>
