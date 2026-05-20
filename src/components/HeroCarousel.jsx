@@ -87,10 +87,10 @@ export function HeroCarousel() {
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
                   <Link href={slide.href}>
-                    <Button size="md"  className="gap-2">
+                    <button size="md"  className="gap-2 btn btn-primary rounded-full">
                       {slide.cta}
                       <ArrowRight className="h-4 w-4" />
-                    </Button>
+                    </button>
                   </Link>
                   <Link href="/register">
                     <Button size="md" variant="outline">
