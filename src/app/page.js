@@ -1,3 +1,4 @@
+import { CallToAction } from "@/components/CallToAction";
 import { FeaturedTutors } from "@/components/FeaturedTutors";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { StatsSection } from "@/components/StatsSection";
@@ -11,6 +12,7 @@ export default function Home() {
       <FeaturedTutors></FeaturedTutors>
       <StatsSection></StatsSection>
       <TestimonialsSection></TestimonialsSection>
+      <CallToAction></CallToAction>
     </div>
   );
 }
