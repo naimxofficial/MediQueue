@@ -16,7 +16,7 @@ export function StatsSection() {
     ]
 
     return (
-        <section className="bg-primary py-16 sm:py-20">
+        <section id="stats" className="bg-primary py-16 sm:py-20">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="text-center">
                     <h2 className="font-serif text-3xl font-bold text-primary-foreground sm:text-4xl">

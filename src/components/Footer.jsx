@@ -27,6 +27,12 @@ const Footer = () => {
                     <Link href={'/my-tutors'} className="link link-hover">My Tutors</Link>
                     <Link href={'/my-booked-sessions'} className="link link-hover">My Booked Sessions</Link>
                 </nav>
+                <nav>
+                    <h6 className="footer-title">About Us</h6>
+                    <Link href={'#featured-tutors'} className="link link-hover">Featured Tutors</Link>
+                    <Link href={'#stats'} className="link link-hover">Stats</Link>
+                    <Link href={'#testimonials'} className="link link-hover">Testimonials</Link>
+                </nav>
                 <div>
                     <h6 className="footer-title">Contact</h6>
                     <ul className=' grid gap-2'>
