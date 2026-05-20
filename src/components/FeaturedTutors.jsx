@@ -1,13 +1,11 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-// import { tutors } from "@/lib/data"
 import { Button } from "@heroui/react"
 import { TutorCard } from "./ui/TutorCard"
 
 export async function FeaturedTutors() {
-  const tutorsCollection = await fetch('http://localhost:5000/tutors')
-  const tutors = await tutorsCollection.json()
-  const featuredTutors = tutors.slice(0, 6)
+  const tutorsCollection = await fetch('http://localhost:5000/featured')
+  const featuredTutors = await tutorsCollection.json()
 
   return (
     <section className="bg-background py-16 sm:py-20" id="featured-tutors">

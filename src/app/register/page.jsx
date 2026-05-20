@@ -152,7 +152,7 @@ const Register = () => {
                     </Button>
                 </div>
                 <h4 className="text-center font-bold text-gray-500">Or</h4>
-                <Button onClick={handleGoogleLogin} variant="outline" className={'w-full'}><FcGoogle />Login with Google</Button>
+                <Button onClick={handleGoogleLogin} variant="outline" className={'w-full'}><FcGoogle />Sign up with Google</Button>
             </Form>
             </CardContent>
             <CardFooter className="justify-center">
