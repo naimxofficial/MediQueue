@@ -79,7 +79,7 @@ export function HeroCarousel() {
                 <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
                   {slide.subtitle}
                 </span>
-                <h1 className="mt-4 font-serif text-4xl not-md:text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+                <h1 className="mt-4 font-serif text-4xl not-md:text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-5xl">
                   {slide.title}
                 </h1>
                 <p className="mt-6 text-lg not-md:text-sm text-muted-foreground">

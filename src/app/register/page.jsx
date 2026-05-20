@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/Card";
+import { GraduationCap } from "lucide-react";
 const Register = () => {
     const [isVisible, setIsVisible] = useState(false);
     const router = useRouter();
@@ -44,9 +46,26 @@ const Register = () => {
 
 
     return (
-        <div className="my-7 not-md:my-5">
-            <h2 className='text-4xl text-center font-bold not-md:text-2xl'>CREATE AN ACCOUNT</h2>
-            <Form className="my-5 p-7 rounded-2xl  mx-auto flex w-96 flex-col gap-4" onSubmit={onSubmit}>
+        <div className="mb-7 not-md:my-5  min-h-screen bg-linear-to-b from-primary/5 to-background p-4">
+            {/* Logo */}
+            <Link href="/" className="mb-8 flex items-center justify-center gap-2">
+
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
+                    <GraduationCap className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <span className="font-serif text-2xl font-semibold text-foreground">
+                    MediQueue
+                </span>
+            </Link>
+             <Card className={'w-full max-w-md mx-auto'}>
+                            <CardHeader className="text-center">
+                                <CardTitle className="font-serif text-2xl">Welcome back</CardTitle>
+                                <CardDescription>
+                                    Enter your credentials to access your account
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+            <Form className="my-5 rounded-2xl  mx-auto flex w-96 not-md:w-85 flex-col gap-4" onSubmit={onSubmit}>
                 {/* name */}
                 <TextField
                     isRequired
@@ -135,7 +154,16 @@ const Register = () => {
                 <h4 className="text-center font-bold text-gray-500">Or</h4>
                 <Button onClick={handleGoogleLogin} variant="outline" className={'w-full'}><FcGoogle />Login with Google</Button>
             </Form>
-            <p className="text-center"><span className="font-semibold text-red-500">Note: </span>If your already have an account, please go to the <Link className="font-bold underline" href='/login'>Login page.</Link></p>
+            </CardContent>
+            <CardFooter className="justify-center">
+            <p className="text-sm text-muted-foreground">
+              Already have an account?{" "}
+              <Link href="/login" className="text-primary hover:underline">
+                Sign in
+              </Link>
+            </p>
+          </CardFooter>
+          </Card>
         </div>
     );
 };

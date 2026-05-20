@@ -60,7 +60,7 @@ export function TutorCard({ tutor }) {
           {tutor.bio}
         </p>
 
-        <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
+        <div className="mt-4 flex items-center justify-between border-t border-foreground/30 pt-4">
           <div>
             <span className="text-2xl font-bold text-primary">
               ${tutor.hourlyRate}
@@ -75,7 +75,7 @@ export function TutorCard({ tutor }) {
         </div>
       </CardContent>
 
-      <CardFooter className="border-t border-border p-4">
+      <CardFooter className="border-t border-foreground/30 p-4">
         <Link href={`/tutors/${tutor.id}`} className="w-full">
           <button className="w-full btn btn-primary rounded-full">View Profile</button>
         </Link>
