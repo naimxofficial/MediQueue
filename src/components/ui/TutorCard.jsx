@@ -76,8 +76,8 @@ export function TutorCard({ tutor }) {
       </CardContent>
 
       <CardFooter className="border-t border-foreground/30 p-4">
-        <Link href={`/tutors/${tutor.id}`} className="w-full">
-          <button className="w-full btn btn-primary rounded-full">View Profile</button>
+        <Link href={`/tutors/${tutor._id}`} className="w-full">
+          <button className="w-full btn btn-primary rounded-full">Book Session</button>
         </Link>
       </CardFooter>
     </Card>

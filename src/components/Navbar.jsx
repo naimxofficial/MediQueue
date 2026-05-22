@@ -11,7 +11,7 @@ const Navbar = () => {
     const pathname = usePathname();
     const { data, isPending } = useSession();
     if (isPending) {
-        return <span className="loading loading-bars loading-xl mx-auto"></span>
+        return <span className="loading loading-spinner text-primary loading-xl mx-auto"></span>
     }
     const user = data?.user;
 
