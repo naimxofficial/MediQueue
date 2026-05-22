@@ -4,7 +4,7 @@ import { headers } from 'next/headers'
 
 export async function proxy(request) {
     const session = await auth.api.getSession({
-        headers: await headers() // you need to pass the headers object.
+        headers: await headers()
     })
     if(!session) {
         return NextResponse.redirect(new URL('/login', request.url))
@@ -12,5 +12,5 @@ export async function proxy(request) {
 }
 
 export const config = {
-    matcher: ['/profile', '/allanimals/:path'],
+    matcher: ['/profile', '/add-tutors', '/tutors/:path', '/my-tutors', '/my-booked-sessions'],
 }
