@@ -43,10 +43,10 @@ export default function AddTutorPage() {
         experience: "",
         languages: [],
         availability: [],
-        photoLink: "",
+        avatar: "",
         availableTimeSlot: "",
-        totalSlots: "",
-        sessionStartDate: "",
+        totalSlot: "",
+        sessionDate: "",
         institution: "",
         location: "",
         teachingMode: "",
@@ -91,8 +91,7 @@ export default function AddTutorPage() {
         setIsSubmitting(true)
 
         try {
-            // Replace '/api/tutors' with your actual backend endpoint
-            const response = await fetch('http://localhost:5000/tutors', {
+            const response = await fetch('http://localhost:5000/my-tutors', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -185,13 +184,13 @@ export default function AddTutorPage() {
                                     rows={4}
                                 />
                                 <div className="space-y-2 mt-4">
-                                    <Label htmlFor="photoLink">Photo Link (imgbb/postimage URL) * </Label>
+                                    <Label htmlFor="avatar">Photo Link (imgbb/postimage URL) * </Label>
                                     <br />
                                     <Input
-                                        id="photoLink"
+                                        id="avatar"
                                         placeholder="https://i.ibb.co/..."
-                                        value={formData.photoLink}
-                                        onChange={(e) => setFormData({ ...formData, photoLink: e.target.value })}
+                                        value={formData.avatar}
+                                        onChange={(e) => setFormData({ ...formData, avatar: e.target.value })}
                                     />
                                 </div>
 
@@ -310,23 +309,23 @@ export default function AddTutorPage() {
                                     </div>
                                     <br />
                                     <div className="space-y-2">
-                                        <Label htmlFor="totalSlots">Total Slots *</Label>
+                                        <Label htmlFor="totalSlot">Total Slots *</Label>
                                         <Input
-                                            id="totalSlots"
+                                            id="totalSlot"
                                             type="number"
                                             placeholder="e.g., 5"
                                             min="1"
-                                            value={formData.totalSlots}
-                                            onChange={(e) => setFormData({ ...formData, totalSlots: e.target.value })}
+                                            value={formData.totalSlot}
+                                            onChange={(e) => setFormData({ ...formData, totalSlot: e.target.value })}
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="sessionStartDate">Session Start Date</Label>
+                                        <Label htmlFor="sessionDate">Session Start Date</Label>
                                         <Input
-                                            id="sessionStartDate"
+                                            id="sessionDate"
                                             type="date"
-                                            value={formData.sessionStartDate}
-                                            onChange={(e) => setFormData({ ...formData, sessionStartDate: e.target.value })}
+                                            value={formData.sessionDate}
+                                            onChange={(e) => setFormData({ ...formData, sessionDate: e.target.value })}
                                         />
                                     </div>
                                 </div>
