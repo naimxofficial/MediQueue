@@ -37,6 +37,8 @@ export default function MyTutorsPage() {
     const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
     const [selectedTutor, setSelectedTutor] = React.useState(null);
     const [isDeleting, setIsDeleting] = React.useState(false);
+    const [isEditing, setIsEditing] = React.useState(false);
+    const [editTutor, setEditTutor] = React.useState(null);
 
     const fetchMyTutors = async () => {
         try {
@@ -61,13 +63,16 @@ export default function MyTutorsPage() {
     }, []);
 
     const handleDelete = async () => {
-        if (!selectedTutor) return;
+        if (!selectedTutor?._id) return;
 
         setIsDeleting(true);
 
         try {
-            // TODO: Add delete API later
-            await new Promise((resolve) => setTimeout(resolve, 800));
+            const res = await fetch(`http://localhost:5000/my-tutors/${selectedTutor._id}`, {
+                method: 'DELETE'
+            });
+
+            if (!res.ok) throw new Error("Delete failed");
 
             setMyTutors((prev) => prev.filter(t => t._id !== selectedTutor._id));
             toast.success("Tutor profile deleted", {
@@ -81,6 +86,50 @@ export default function MyTutorsPage() {
         }
     };
 
+
+    const handleEditClick = (tutor) => {
+        setEditTutor({ ...tutor });
+        setIsEditing(true);
+    };
+
+    const handleUpdate = async () => {
+        if (!editTutor?._id) {
+            toast.error("No tutor selected");
+            return;
+        }
+
+        try {
+            const { _id, createdAt, ...dataToUpdate } = editTutor;
+
+            const res = await fetch(`http://localhost:5000/my-tutors/${_id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dataToUpdate),
+            });
+
+            const result = await res.json();
+
+            if (!res.ok) {
+                throw new Error(result.error || "Update failed");
+            }
+
+            toast.success("Tutor updated successfully");
+            setIsEditing(false);
+            setEditTutor(null);
+            fetchMyTutors(); 
+        } catch (error) {
+            console.error(error);
+            toast.error(error.message || "Failed to update tutor");
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setEditTutor(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
     if (loading) {
         return (
             <div className="mx-auto max-w-7xl px-4 py-8">
@@ -128,9 +177,9 @@ export default function MyTutorsPage() {
                                         <TableHead>Tutor</TableHead>
                                         <TableHead>Subject</TableHead>
                                         <TableHead>Rate</TableHead>
-                                        <TableHead>Sessions</TableHead>
-                                        <TableHead>Rating</TableHead>
-                                        <TableHead>Status</TableHead>
+                                        <TableHead>Experience</TableHead>
+                                        <TableHead>Location</TableHead>
+                                        <TableHead>Total Slot</TableHead>
                                         <TableHead className="w-17"></TableHead>
                                     </TableRow>
                                 </TableHeader>
@@ -169,23 +218,14 @@ export default function MyTutorsPage() {
                                                 <span className="font-medium">${tutor.hourlyRate}</span>
                                                 <span className="text-muted-foreground">/hr</span>
                                             </TableCell>
-                                            <TableCell>{(tutor.totalSessions || 0).toLocaleString()}</TableCell>
+                                            <TableCell>{(tutor.experience || 0).toLocaleString()}</TableCell>
                                             <TableCell>
                                                 <div className="flex items-center gap-1">
-                                                    <span className="font-medium">{tutor.rating}</span>
-                                                    <span className="text-muted-foreground">
-                                                        ({tutor.reviewCount})
-                                                    </span>
+                                                    <span className="font-medium">{tutor.location}</span>
                                                 </div>
                                             </TableCell>
                                             <TableCell>
-                                                {tutor.verified ? (
-                                                    <span className="bg-accent text-accent-foreground badge">
-                                                        Verified
-                                                    </span>
-                                                ) : (
-                                                    <span className="badge">Pending</span>
-                                                )}
+                                                <span className="font-medium">{tutor.totalSlot}</span>
                                             </TableCell>
                                             <TableCell>
                                                 <DropdownMenu>
@@ -196,7 +236,7 @@ export default function MyTutorsPage() {
                                                         </button>
                                                     </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="end">
-                                                        <DropdownMenuItem>
+                                                        <DropdownMenuItem onClick={() => handleEditClick(tutor)}>
                                                             <Pencil className="mr-2 h-4 w-4" />
                                                             Edit
                                                         </DropdownMenuItem>
@@ -256,6 +296,110 @@ export default function MyTutorsPage() {
                             disabled={isDeleting}
                         >
                             {isDeleting ? "Deleting..." : "Delete"}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            {/* Edit Tutor Dialog */}
+            <Dialog open={isEditing} onOpenChange={setIsEditing}>
+                <DialogContent className="max-w-md">
+                    <DialogHeader>
+                        <DialogTitle className="font-serif">Edit Tutor Profile</DialogTitle>
+                        <DialogDescription>
+                            Update the tutor information below
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    {editTutor && (
+                        <div className="space-y-4 py-4">
+                            <div>
+                                <label className="text-sm font-medium">Name</label>
+                                <Input
+                                    name="name"
+                                    value={editTutor.name || ""}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div>
+                                <label className="text-sm font-medium">Email</label>
+                                <Input
+                                    name="email"
+                                    value={editTutor.email || ""}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="text-sm font-medium">Subject</label>
+                                    <Input
+                                        name="subject"
+                                        value={editTutor.subject || ""}
+                                        onChange={handleInputChange}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="text-sm font-medium">Specialty</label>
+                                    <Input
+                                        name="specialty"
+                                        value={editTutor.specialty || ""}
+                                        onChange={handleInputChange}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="text-sm font-medium">Hourly Rate ($)</label>
+                                    <Input
+                                        name="hourlyRate"
+                                        type="number"
+                                        value={editTutor.hourlyRate || ""}
+                                        onChange={handleInputChange}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="text-sm font-medium">Experience</label>
+                                    <Input
+                                        name="experience"
+                                        type="number"
+                                        value={editTutor.experience || ""}
+                                        onChange={handleInputChange}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="text-sm font-medium">Location</label>
+                                    <Input
+                                        name="location"
+                                        value={editTutor.location || ""}
+                                        onChange={handleInputChange}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="text-sm font-medium">Total Slot</label>
+                                    <Input
+                                        name="totalSlot"
+                                        type="number"
+                                        value={editTutor.totalSlot || ""}
+                                        onChange={handleInputChange}
+                                    />
+                                </div>
+                            </div>
+
+                        </div>
+                    )}
+
+                    <DialogFooter>
+                        <button className="btn btn-outline" onClick={() => setIsEditing(false)}>
+                            Cancel
+                        </button>
+                        <Button onClick={handleUpdate}>
+                            Save Changes
                         </Button>
                     </DialogFooter>
                 </DialogContent>
