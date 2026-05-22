@@ -48,7 +48,6 @@ export default function TutorDetailsPage() {
     const [isBooking, setIsBooking] = React.useState(false)
     const [studentName, setStudentName] = React.useState("")
     const [phone, setPhone] = React.useState("")
-    // const [studentEmail, setStudentEmail] = React.useState(currentUser?.email || "")
     if (!tutor) return <div className="loading loading-spinner text-primary loading-xl mx-auto"></div>
 
     const handleBookSession = async () => {
@@ -81,7 +80,7 @@ export default function TutorDetailsPage() {
             })
             toast.success("Session booked successfully!")
             setBookingOpen(false)
-            router.push("/dashboard/my-sessions")
+            router.push("/my-booked-sessions")
         }
         if (!res.ok) {
             const errorData = await res.json().catch(() => ({}))

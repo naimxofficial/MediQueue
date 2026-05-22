@@ -34,7 +34,7 @@ const Footer = () => {
                     <Link href={'#testimonials'} className="link link-hover">Testimonials</Link>
                 </nav>
                 <div>
-                    <h6 className="footer-title">Contact</h6>
+                    <h6 className="footer-title">Contact Us</h6>
                     <ul className=' grid gap-2'>
                         <li className="link link-hover"><a href="mailto:mediqueue.bd@gmail.com">Email: mediqueue.bd@gmail.com</a></li>
                         <li className="link link-hover"><a href="tel:+88012345678"></a>Phone: +880 1234 5678</li>

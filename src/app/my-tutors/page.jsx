@@ -52,7 +52,7 @@ export default function MyTutorsPage() {
         } catch (error) {
             console.error(error);
             toast.error("Failed to load tutors");
-            setMyTutors([]);           // ← Added this
+            setMyTutors([]);
         } finally {
             setLoading(false);
         }
@@ -132,9 +132,7 @@ export default function MyTutorsPage() {
     };
     if (loading) {
         return (
-            <div className="mx-auto max-w-7xl px-4 py-8">
-                <p className="text-center text-muted-foreground">Loading your tutors...</p>
-            </div>
+            <span className="loading loading-spinner text-primary loading-xl mx-auto flex justify-center items-center"></span>
         );
     }
 

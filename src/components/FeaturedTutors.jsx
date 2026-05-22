@@ -7,6 +7,10 @@ export async function FeaturedTutors() {
   const tutorsCollection = await fetch('http://localhost:5000/featured')
   const featuredTutors = await tutorsCollection.json()
 
+   if(!featuredTutors){
+    return <div className="flex justify-center"><span className="loading loading-spinner text-primary loading-xl"></span></div>
+  }
+
   return (
     <section className="bg-background py-16 sm:py-20" id="featured-tutors">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -11,7 +11,7 @@ const Navbar = () => {
     const pathname = usePathname();
     const { data, isPending } = useSession();
     if (isPending) {
-        return <span className="loading loading-spinner text-primary loading-xl mx-auto"></span>
+        return <span className="loading loading-bars loading-xl mx-auto"></span>
     }
     const user = data?.user;
 
@@ -45,7 +45,7 @@ const Navbar = () => {
                 {
                     user && <div> <Link className={pathname === '/add-tutors' ? 'bg-primary text-primary-foreground font-medium px-5 py-2 rounded-full' : 'text-popover-foreground/80 hover:bg-muted px-5 py-2 rounded-full'} href="/add-tutors">Add Tutors</Link>
                         <Link className={pathname === '/my-tutors' ? 'bg-primary text-primary-foreground font-medium px-5 py-2 rounded-full' : 'text-popover-foreground/80 hover:bg-muted px-5 py-2 rounded-full'} href="/my-tutors">My Tutors</Link>
-                        <Link className={pathname === '/my-booked-sessions' ? 'bg-primary text-primary-foreground font-medium px-5 py-2 rounded-full' : 'px-5 py-2 rounded-full text-popover-foreground/80 hover:bg-muted'} href="/dashboard/my-booked-sessions">My Booked Sessions</Link></div>
+                        <Link className={pathname === '/my-booked-sessions' ? 'bg-primary text-primary-foreground font-medium px-5 py-2 rounded-full' : 'px-5 py-2 rounded-full text-popover-foreground/80 hover:bg-muted'} href="/my-booked-sessions">My Booked Sessions</Link></div>
                 }
 
 
@@ -94,11 +94,11 @@ const Navbar = () => {
                                 </div>
                                 <Dropdown.Menu>
                                     <Dropdown.Item id="profile" textValue="Profile">
-                                        <Link href={'\profile'}>Profile</Link>
+                                        <Link href={'/profile'} className="block w-full h-full">Profile</Link>
                                     </Dropdown.Item>
                                     <Dropdown.Item id="logout" textValue="Logout" variant="danger">
                                         <div className="flex w-full items-center justify-between gap-2">
-                                            <button className="text-red-500" onClick={handleLogout}>Log Out</button>
+                                            <button className="text-red-500 block w-full h-full text-left" onClick={handleLogout} >Log Out</button>
                                             <ArrowRightFromSquare className="size-3.5 text-danger" />
                                         </div>
                                     </Dropdown.Item>
