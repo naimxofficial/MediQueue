@@ -30,6 +30,9 @@ const Login = () => {
             toast.error('Login error:' + error.message)
         }
         if (data) {
+            const res = await fetch('/api/auth/token', { credentials: 'include' });
+            const { token } = await res.json();
+            localStorage.setItem('token', token);
             toast.success('Login Successful.')
         }
     };
@@ -37,7 +40,10 @@ const Login = () => {
     const handleGoogleLogin = async () => {
         await authClient.signIn.social({
             provider: "google",
-        })
+        });
+        const res = await fetch('/api/auth/token', { credentials: 'include' });
+        const { token } = await res.json();
+        localStorage.setItem('token', token);
     }
     return (
         <div className="mb-7 not-md:my-5  min-h-screen bg-linear-to-b from-primary/5 to-background p-4">
