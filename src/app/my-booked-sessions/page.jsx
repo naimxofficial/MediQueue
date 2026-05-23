@@ -46,7 +46,7 @@ export default function MyBookedSessionsPage() {
   const fetchMyBookings = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/bookings");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings`);
 
       if (!res.ok) throw new Error("Failed to fetch");
 
@@ -74,7 +74,7 @@ export default function MyBookedSessionsPage() {
     setIsCancelling(true);
 
     try {
-      const res = await fetch(`http://localhost:5000/bookings/${selectedSession._id}/cancel`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings/${selectedSession._id}/cancel`, {
         method: 'PATCH'
       });
 

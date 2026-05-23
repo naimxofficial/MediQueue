@@ -17,7 +17,7 @@ export default function TutorsPage() {
     if (startDate) params.append("startDate", startDate)
     if (endDate) params.append("endDate", endDate)
 
-    fetch(`http://localhost:5000/tutors?${params}`)
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tutors?${params}`)
       .then((res) => res.json())
       .then((data) => setTutors(data))
   }, [search, startDate, endDate])

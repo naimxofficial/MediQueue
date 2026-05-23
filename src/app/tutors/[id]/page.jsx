@@ -39,7 +39,7 @@ export default function TutorDetailsPage() {
     const currentUser = session?.user
 
     React.useEffect(() => {
-        fetch(`http://localhost:5000/tutors/${params.id}`)
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${params.id}`)
             .then((res) => res.json())
             .then((data) => setTutor(data))
     }, [params.id])
@@ -67,7 +67,7 @@ export default function TutorDetailsPage() {
             bookStatus: "pending",
         }
 
-        const res = await fetch("http://localhost:5000/bookings", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(bookingData),
@@ -75,7 +75,7 @@ export default function TutorDetailsPage() {
 
         if (res.ok) {
             // decrease slot
-            await fetch(`http://localhost:5000/tutors/${tutor._id}/decrease-slot`, {
+            await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${tutor._id}/decrease-slot`, {
                 method: "PATCH",
             })
             toast.success("Session booked successfully!")

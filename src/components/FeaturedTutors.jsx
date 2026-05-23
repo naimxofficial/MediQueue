@@ -4,7 +4,7 @@ import { Button } from "@heroui/react"
 import { TutorCard } from "./ui/TutorCard"
 
 export async function FeaturedTutors() {
-  const tutorsCollection = await fetch('http://localhost:5000/featured')
+  const tutorsCollection = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured`)
   const featuredTutors = await tutorsCollection.json()
 
    if(!featuredTutors){

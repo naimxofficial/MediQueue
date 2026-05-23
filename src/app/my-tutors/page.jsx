@@ -43,7 +43,7 @@ export default function MyTutorsPage() {
     const fetchMyTutors = async () => {
         try {
             setLoading(true);
-            const res = await fetch("http://localhost:5000/my-tutors");
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors`);
 
             if (!res.ok) throw new Error("Failed to fetch");
 
@@ -68,7 +68,7 @@ export default function MyTutorsPage() {
         setIsDeleting(true);
 
         try {
-            const res = await fetch(`http://localhost:5000/my-tutors/${selectedTutor._id}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors/${selectedTutor._id}`, {
                 method: 'DELETE'
             });
 
@@ -101,7 +101,7 @@ export default function MyTutorsPage() {
         try {
             const { _id, createdAt, ...dataToUpdate } = editTutor;
 
-            const res = await fetch(`http://localhost:5000/my-tutors/${_id}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors/${_id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dataToUpdate),

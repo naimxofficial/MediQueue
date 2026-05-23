@@ -91,7 +91,7 @@ export default function AddTutorPage() {
         setIsSubmitting(true)
 
         try {
-            const response = await fetch('http://localhost:5000/my-tutors', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
