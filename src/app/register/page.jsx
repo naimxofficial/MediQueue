@@ -32,9 +32,6 @@ const Register = () => {
             toast.error('Account registration failed:' + error.message)
         }
         if (data) {
-            const res = await fetch('/api/auth/token', { credentials: 'include' });
-            const { token } = await res.json();
-            localStorage.setItem('token', token);
             toast.success('Account registered successfully!')
             router.push('/login')
         }

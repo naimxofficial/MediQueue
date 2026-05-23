@@ -18,6 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -37,15 +38,8 @@ export default function TutorDetailsPage() {
     const { data: session } = authClient.useSession()
     const currentUser = session?.user
 
-
     React.useEffect(() => {
-        fetch(`http://localhost:5000/tutors/${params.id}`,
-            {
-                headers: {
-                    authorization: "logged in"
-                }
-            }
-        )
+        fetch(`http://localhost:5000/tutors/${params.id}`)
             .then((res) => res.json())
             .then((data) => setTutor(data))
     }, [params.id])
@@ -73,13 +67,9 @@ export default function TutorDetailsPage() {
             bookStatus: "pending",
         }
 
-
-
         const res = await fetch("http://localhost:5000/bookings", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(bookingData),
         })
 
