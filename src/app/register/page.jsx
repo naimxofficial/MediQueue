@@ -34,6 +34,15 @@ const Register = () => {
         if (data) {
             toast.success('Account registered successfully!')
             router.push('/login')
+
+            
+            const { email, name } = data.user;
+            console.log('Sending email to:', email, 'with name:', name);
+
+            //api call
+            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/send-email?email=${email}&name=${name}`,{
+                method: 'POST',
+            })
         }
 
     };
